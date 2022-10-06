@@ -1,15 +1,15 @@
 package:
   name: ncrystal
-  version: 3.3.0
+  version: 3.3.1
 
 source:
-  url: https://github.com/mctools/ncrystal/archive/v3.3.0.tar.gz
-  sha256: 0a1e1c818e78bf61a0acf9b941fde8b813d74d1332c399d38198789b5c502219
+  url: https://github.com/mctools/ncrystal/archive/v3.3.1.tar.gz
+  sha256: 92dda24cd9444e22f7f661a9c29d2ebb9bf05218442ee25b3fbfec3918206c57
   fn: ncrystal-src.tar.gz
   folder: src
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win]
   skip: true  # [py<36]
 
