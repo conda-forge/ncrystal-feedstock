@@ -1,10 +1,10 @@
 package:
   name: ncrystal
-  version: 3.3.1
+  version: 3.4.0
 
 source:
-  url: https://github.com/mctools/ncrystal/archive/v3.3.1.tar.gz
-  sha256: 92dda24cd9444e22f7f661a9c29d2ebb9bf05218442ee25b3fbfec3918206c57
+  url: https://github.com/mctools/ncrystal/archive/v3.4.0.tar.gz
+  sha256: 6901c594b2c7b25a1e8b0fe1d72c88c969f5c6e5e34c33e7a44020c3d30d338b
   fn: ncrystal-src.tar.gz
   folder: src
 
@@ -51,7 +51,7 @@ test:
     - ncrystal_inspectfile --help
     - ncrystal_preparemcstasdir
     - test -f ./NCrystal_sample.comp
-    - cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST -DCMAKE_PREFIX_PATH=$CONDA_PREFIX/lib/cmake
+    - cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
 about:
   home: https://github.com/mctools/ncrystal
   summary: Library for thermal neutron transport in crystals and other materials.
