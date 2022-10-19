@@ -1,10 +1,10 @@
 package:
   name: ncrystal
-  version: 3.4.0
+  version: 3.4.1
 
 source:
-  url: https://github.com/mctools/ncrystal/archive/v3.4.0.tar.gz
-  sha256: 6901c594b2c7b25a1e8b0fe1d72c88c969f5c6e5e34c33e7a44020c3d30d338b
+  url: https://github.com/mctools/ncrystal/archive/v3.4.1.tar.gz
+  sha256: 2ec7ab9f22e228f88ff7edfd40df6be6d0aa71845f02c25d051bca48eaf11e61
   fn: ncrystal-src.tar.gz
   folder: src
 
