@@ -1,10 +1,14 @@
+{% set version = "3.5.0" %}
+{% set sha_value = "dd0fe9a836bb90cd425dd3902d89cca2221bb53532dc2b413a280648e1ed853e" %}
+#NB get sha256 with: curl -sL <URL> | openssl sha256
+
 package:
   name: ncrystal
-  version: 3.4.1
+  version: {{ version }}
 
 source:
-  url: https://github.com/mctools/ncrystal/archive/v3.4.1.tar.gz
-  sha256: 2ec7ab9f22e228f88ff7edfd40df6be6d0aa71845f02c25d051bca48eaf11e61
+  url: https://github.com/mctools/ncrystal/archive/v{{ version }}.tar.gz
+  sha256: {{ sha_value }}
   fn: ncrystal-src.tar.gz
   folder: src
 
@@ -14,7 +18,7 @@ build:
   skip: true  # [py<36]
 
 requirements:
-  #todo: how do we add dependency on libdl.so? (or we must put -DDISABLE_DYNLOAD=OFF).
+  #todo: how do we add dependency on libdl.so? (or we must put -DNCRYSTAL_ENABLE_DYNLOAD=OFF).
   build:
     - cmake
     - make  # [not win]
