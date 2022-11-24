@@ -17,11 +17,12 @@ cmake \
     -DNCRYSTAL_ENABLE_DATA=EMBED \
     -DNCRYSTAL_SKIP_PYMODINST=ON \
     -DPython3_EXECUTABLE="$PYTHON" \
-    -DCMAKE_BUILD_PARALLEL_LEVEL=${CPU_COUNT:-1}
     ${CMAKE_ARGS}
 
-cmake --build . --config Release
-cmake --install .
+#cmake --build . --config Release
+#cmake --install .
+make -j${CPU_COUNT:-1}
+make install
 
 #Note: There is no "make test" or "make ctest" functionality for NCrystal
 #      yet. If it appears in the future, we should add it here.
