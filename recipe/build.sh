@@ -10,19 +10,18 @@ cmake \
     "${SRC_DIR}/src" \
     -DBUILD_SHARED_LIBS=ON \
     -DNCRYSTAL_NOTOUCH_CMAKE_BUILD_TYPE=ON \
-    -DMODIFY_RPATH=OFF \
+    -DNCRYSTAL_MODIFY_RPATH=OFF \
     -DCMAKE_INSTALL_LIBDIR=lib \
     -DCMAKE_BUILD_TYPE=Release \
-    -DBUILD_EXAMPLES=OFF \
-    -DINSTALL_SETUPSH=OFF \
-    -DEMBED_DATA=ON \
-    -DINSTALL_DATA=OFF \
-    -DNO_DIRECT_PYMODINST=ON \
+    -DNCRYSTAL_ENABLE_SETUPSH=OFF \
+    -DNCRYSTAL_ENABLE_DATA=EMBED \
+    -DNCRYSTAL_SKIP_PYMODINST=ON \
     -DPython3_EXECUTABLE="$PYTHON" \
+    -DCMAKE_BUILD_PARALLEL_LEVEL=${CPU_COUNT:-1}
     ${CMAKE_ARGS}
 
-make -j${CPU_COUNT:-1}
-make install
+cmake --build . --config Release
+cmake --install .
 
 #Note: There is no "make test" or "make ctest" functionality for NCrystal
 #      yet. If it appears in the future, we should add it here.
