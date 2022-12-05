@@ -1,5 +1,5 @@
-{% set version = "3.5.0" %}
-{% set sha_value = "dd0fe9a836bb90cd425dd3902d89cca2221bb53532dc2b413a280648e1ed853e" %}
+{% set version = "3.5.1" %}
+{% set sha_value = "01737c120ecfb2a1e445f6dd6b290a697861710b1093dc2f35e9a688ffd1af5e" %}
 #NB get sha256 with: curl -sL <URL> | openssl sha256
 
 package:
@@ -13,7 +13,7 @@ source:
   folder: src
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win]
   skip: true  # [py<36]
 
