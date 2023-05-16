@@ -1,5 +1,5 @@
-{% set version = "3.5.1" %}
-{% set sha_value = "01737c120ecfb2a1e445f6dd6b290a697861710b1093dc2f35e9a688ffd1af5e" %}
+{% set version = "3.6.0" %}
+{% set sha_value = "ca34c376e2915b18e7d661ed89c1b91ea46b9bc40ca73c81c7e16453b0833ef8" %}
 #NB get sha256 with: curl -sL <URL> | openssl sha256
 
 package:
@@ -48,12 +48,11 @@ test:
     - ncrystal_hfg2ncmat --help
     - ncrystal_ncmat2cpp --help
     - ncrystal_ncmat2hkl --help
-    - ncrystal_onlinedb2ncmat --help
+    - ncrystal_cif2ncmat --help
     - ncrystal_vdos2ncmat --help
     - ncrystal_verifyatompos --help
     - nctool --help
     - ncrystal_inspectfile --help
-    - ncrystal_preparemcstasdir
     - test -f ./NCrystal_sample.comp
     - cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
 about:
