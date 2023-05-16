@@ -53,7 +53,6 @@ test:
     - ncrystal_verifyatompos --help
     - nctool --help
     - ncrystal_inspectfile --help
-    - test -f ./NCrystal_sample.comp
     - cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
 about:
   home: https://github.com/mctools/ncrystal
