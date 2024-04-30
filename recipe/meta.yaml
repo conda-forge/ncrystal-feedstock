@@ -1,5 +1,5 @@
-{% set version = "3.8.1" %}
-{% set sha_value = "2c285d0b128e6b388d17839f4dad219534b4511af3b34bc28e52e86ee943ff9a" %}
+{% set version = "3.8.2" %}
+{% set sha_value = "9cd09139901714e54397d05a44571d56fdc6f6ef39c493ba311ff911bf250a39" %}
 #NB get sha256 with: curl -sL <URL> | openssl sha256
 
 package:
@@ -25,6 +25,7 @@ requirements:
     - cmake
     - make  # [not win]
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
   host:
     - python
     - pip
