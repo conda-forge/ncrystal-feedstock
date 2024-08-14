@@ -1,5 +1,5 @@
-{% set version = "3.8.2" %}
-{% set sha_value = "9cd09139901714e54397d05a44571d56fdc6f6ef39c493ba311ff911bf250a39" %}
+{% set version = "3.9.0" %}
+{% set sha_value = "af74b19dc2f0e33051c9e96fa74b0aa0d0f9da12ccc11aedae0d9dc65724a607" %}
 #NB get sha256 with: curl -sL <URL> | openssl sha256
 
 package:
@@ -7,7 +7,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/mctools/ncrystal/archive/v{{ version }}.tar.gz
+  url: https://github.com/mctools/ncrystal/archive/a26afa6.tar.gz
+  #url: https://github.com/mctools/ncrystal/archive/v{{ version }}.tar.gz
   sha256: {{ sha_value }}
   fn: ncrystal-src.tar.gz
   folder: src
