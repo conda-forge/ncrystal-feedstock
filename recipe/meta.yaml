@@ -13,9 +13,9 @@ source:
   folder: src
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
-  skip: true  # [py<36]
+  skip: true  # [py<38]
 
 requirements:
   #todo: how do we add dependency on libdl.so? (or we must put -DNCRYSTAL_ENABLE_DYNLOAD=OFF).
