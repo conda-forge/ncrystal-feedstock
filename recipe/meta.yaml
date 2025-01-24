@@ -1,61 +1,102 @@
-{% set version = "3.9.7" %}
-{% set sha_value = "7b9ed5ae26d7971c1f4014b62c139631231450f3de32154626b38ea9c56f035f" %}
-#NB get sha256 with: curl -sL <URL> | openssl sha256
+{% set version = "3.9.82" %}
 
 package:
-  name: ncrystal
+  name: ncrystal-suite
   version: {{ version }}
 
 source:
-  url: https://github.com/mctools/ncrystal/archive/v{{ version }}.tar.gz
-  sha256: {{ sha_value }}
-  fn: ncrystal-src.tar.gz
+  #fixme:
+  url: https://github.com/mctools/ncrystal/archive/06537e88.tar.gz
+  sha256: b203cfd6c688224d371dc6f227352e6056d1bd33c23d0710c5ca8119d633485c
   folder: src
 
 build:
-  number: 4
-  skip: true  # [win]
+  noarch: python
+  number: 0
 
-requirements:
-  #todo: how do we add dependency on libdl.so? (or we must put -DNCRYSTAL_ENABLE_DYNLOAD=OFF).
-  build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - cmake
-    - make  # [not win]
-    - {{ compiler('cxx') }}
-    - {{ stdlib("c") }}
-  host:
-    - python
-    - setuptools
-    - pip
-  run:
-    - python
-    - numpy
+outputs:
+  - name: ncrystal-core
+    script: build_core.sh  # [unix]
+    script: build_core.bat  # [win]
+    build:
+      ignore_run_exports_from:
+        - python
+    requirements:
+      build:
+        - cmake >=3.25
+        - make  # [not win]
+        - {{ compiler('cxx') }}
+        - {{ compiler('c') }}
+        - {{ stdlib("c") }}
+      host:
+        - python  # note that python is only used to convert ncmat->C++ code
+      run:
+        #fixme: we just want to not have an empty section for now, and nothing
+        #using python
+        - zlib
+    test:
+      requires:
+        - cmake >=3.25
+      commands:
+        - ncrystal-config --help
+        - ncrystal-config -s
+        - test -f $(ncrystal-config --show libpath)
+        - test -f $(ncrystal-config --show shlibpath)
+        - test -d $(ncrystal-config --show includedir)
+        - cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
 
-test:
-  requires:
-    - python
-    - numpy
-    - cmake
-  imports:
-    - NCrystal
-  commands:
-    - ncrystal-config --help
-    - ncrystal-config -s
-    - nctool --version
-    - nctool --help
-    - nctool --test
-    - ncrystal_endf2ncmat --help
-    - ncrystal_hfg2ncmat --help
-    - ncrystal_ncmat2cpp --help
-    - ncrystal_ncmat2hkl --help
-    - ncrystal_cif2ncmat --help
-    - ncrystal_vdos2ncmat --help
-    - ncrystal_verifyatompos --help
-    - nctool --help
-    - python3 -c 'import NCrystal; NCrystal.test()'
-    - cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
+  - name: ncrystal-python
+    #For some reason putting the pip install command inline here does not work,
+    #so we use some scripts:
+    script: build_python.sh  # [unix]
+    script: build_python.bat  # [win]
+    build:
+      noarch: python
+    entry_points:
+      - nctool = NCrystal._cli_nctool:main
+    requirements:
+      host:
+        - python
+        - pip
+        - setuptools >=64.0
+      run:
+        - python
+        - numpy >=1.22
+    test:
+      commands:
+        - python3 -c 'import os; os.environ["NCRYSTAL_SLIMPYINIT"]="1"; import NCrystal'
+
+  - name: ncrystal
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - {{ pin_subpackage('ncrystal-core', max_pin="x.x.x") }}
+        - {{ pin_subpackage('ncrystal-python', max_pin="x.x.x") }}
+    test:
+      requires:
+        - cmake >=3.25
+      imports:
+        - NCrystal
+      commands:
+        - ncrystal-config --help
+        - ncrystal-config -s
+        - python3 -c 'import NCrystal; NCrystal.test()'
+        - python3 -mNCrystal endf2ncmat --help
+        - cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
+#        - nctool --version
+#        - nctool --help
+#        - nctool --test
+#fixme: entry points
+#        - ncrystal_endf2ncmat --help
+#        - ncrystal_hfg2ncmat --help
+#        - ncrystal_ncmat2cpp --help
+#        - ncrystal_ncmat2hkl --help
+#        - ncrystal_cif2ncmat --help
+#        - ncrystal_vdos2ncmat --help
+#        - ncrystal_verifyatompos --help
+#        - nctool --help
+
 about:
   home: https://github.com/mctools/ncrystal
   summary: Library for thermal neutron transport in crystals and other materials.
