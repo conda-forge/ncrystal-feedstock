@@ -69,25 +69,30 @@ outputs:
         - numpy >=1.22
     test:
       commands:
-        - python3 -c 'import os; os.environ["NCRYSTAL_SLIMPYINIT"]="1"; import NCrystal'
+        - {{ PYTHON }} -c 'import os; os.environ["NCRYSTAL_SLIMPYINIT"]="1"; import NCrystal'
 
   - name: ncrystal
+    #Fixme: Should "pip list" show ncrystal as being installed? To prevent pip
+    #installs in the conda environment from pulling in ncrystal from pypi?
     build:
       noarch: generic
     requirements:
       run:
-        - {{ pin_subpackage('ncrystal-core', max_pin="x.x.x") }}
-        - {{ pin_subpackage('ncrystal-python', max_pin="x.x.x") }}
+        #The ncrystal meta package ensures version matching between the other
+        #ncrystal packages:
+        - ncrystal-core ={{ version }}
+        - ncrystal-python={{ version }}
     test:
       requires:
+        - python # fixme not sure this is needed
         - cmake >=3.25
       imports:
         - NCrystal
       commands:
         - ncrystal-config --help
         - ncrystal-config -s
-        - python3 -c 'import NCrystal; NCrystal.test()'
-        - python3 -mNCrystal.test cmdline
+        - {{ PYTHON }} -c 'import NCrystal; NCrystal.test()'
+        - {{ PYTHON }} -mNCrystal.test cmdline
         - nctool --help
         - ncrystal_cif2ncmat --help
         - ncrystal_endf2ncmat --help
