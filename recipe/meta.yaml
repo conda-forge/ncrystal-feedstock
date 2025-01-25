@@ -5,6 +5,10 @@
 {% set PYTHON = "python" %}
 {% endif %}
 
+{% if python_min is not defined %}
+{% set python_min = "3.10" %}
+{% endif %}
+
 package:
   #Fixme: I think we ultimately need to rename this back to "ncrystal", since
   #the rerendered docs otherwise refers to "ncrystal-suite-feedstock"
@@ -66,15 +70,16 @@ outputs:
         - ncrystal_verifyatompos = NCrystal._cli_verifyatompos:main
     requirements:
       host:
-        - python
+        - python  {{ python_min }}
         - pip
         - setuptools >=64.0
       run:
-        - python
+        - python >={{ python_min }}
         - numpy >=1.22
     test:
       requires:
-        - python
+        - python {{ python_min }}
+        - pip
       commands:
         - pip check
         #fixme - {{ PYTHON }} -c 'import os; os.environ["NCRYSTAL_SLIMPYINIT"]="1"; import NCrystal'
@@ -86,17 +91,18 @@ outputs:
       noarch: generic
     requirements:
       host:
-        - python
+        - python {{ python_min }}
       run:
         #The ncrystal meta package ensures version matching between the other
         #ncrystal packages:
-        - python
+        - python >={{ python_min }}
         - ncrystal-core ={{ version }}
         - ncrystal-python={{ version }}
     test:
       requires:
-        - python
+        - python {{ python_min }}
         - cmake >=3.25
+        - pip
       imports:
         - NCrystal
       commands:
