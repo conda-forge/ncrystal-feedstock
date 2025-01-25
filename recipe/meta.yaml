@@ -1,5 +1,10 @@
 {% set version = "3.9.82" %}
 
+#Workaround for https://github.com/conda/conda-build/issues/5424:
+{% if PYTHON is not defined %}
+{% set PYTHON = "python" %}
+{% endif %}
+
 package:
   #Fixme: I think we ultimately need to rename this back to "ncrystal", since
   #the rerendered docs otherwise refers to "ncrystal-suite-feedstock"
