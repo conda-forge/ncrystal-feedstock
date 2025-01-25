@@ -77,14 +77,16 @@ outputs:
     build:
       noarch: generic
     requirements:
+      host:
+        - python
       run:
         #The ncrystal meta package ensures version matching between the other
         #ncrystal packages:
+        - python
         - ncrystal-core ={{ version }}
         - ncrystal-python={{ version }}
     test:
       requires:
-        - python # fixme not sure this is needed
         - cmake >=3.25
       imports:
         - NCrystal
