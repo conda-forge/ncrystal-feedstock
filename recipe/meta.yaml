@@ -68,6 +68,8 @@ outputs:
         - python
         - numpy >=1.22
     test:
+      requires:
+        - python
       commands:
         - {{ PYTHON }} -c 'import os; os.environ["NCRYSTAL_SLIMPYINIT"]="1"; import NCrystal'
 
@@ -87,6 +89,7 @@ outputs:
         - ncrystal-python={{ version }}
     test:
       requires:
+        - python
         - cmake >=3.25
       imports:
         - NCrystal
