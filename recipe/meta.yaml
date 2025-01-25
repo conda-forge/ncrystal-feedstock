@@ -54,6 +54,15 @@ outputs:
       noarch: python
     entry_points:
       - nctool = NCrystal._cli_nctool:main
+      - ncrystal_cif2ncmat = NCrystal._cli_cif2ncmat:main
+      - ncrystal_endf2ncmat = NCrystal._cli_endf2ncmat:main
+      - ncrystal_hfg2ncmat = NCrystal._cli_hfg2ncmat:main
+      - ncrystal_mcstasunion = NCrystal._cli_mcstasunion:main
+      - ncrystal_ncmat2cpp = NCrystal._cli_ncmat2cpp:main
+      - ncrystal_ncmat2hkl = NCrystal._cli_ncmat2hkl:main
+      - ncrystal_vdos2ncmat = NCrystal._cli_vdos2ncmat:main
+      - ncrystal_verifyatompos = NCrystal._cli_verifyatompos:main
+
     requirements:
       host:
         - python
@@ -82,20 +91,19 @@ outputs:
         - ncrystal-config --help
         - ncrystal-config -s
         - python3 -c 'import NCrystal; NCrystal.test()'
-        - python3 -mNCrystal endf2ncmat --help
+        - python3 -mNCrystal.test cmdline
+        - nctool --help
+        - ncrystal_cif2ncmat --help
+        - ncrystal_endf2ncmat --help
+        - ncrystal_hfg2ncmat --help
+        - ncrystal_mcstasunion --help
+        - ncrystal_ncmat2cpp --help
+        - ncrystal_ncmat2hkl --help
+        - ncrystal_vdos2ncmat --help
+        - ncrystal_verifyatompos --help
+        - nctool --test
         - cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
-#        - nctool --version
-#        - nctool --help
-#        - nctool --test
-#fixme: entry points
-#        - ncrystal_endf2ncmat --help
-#        - ncrystal_hfg2ncmat --help
-#        - ncrystal_ncmat2cpp --help
-#        - ncrystal_ncmat2hkl --help
-#        - ncrystal_cif2ncmat --help
-#        - ncrystal_vdos2ncmat --help
-#        - ncrystal_verifyatompos --help
-#        - nctool --help
+        #Fixme: Also actually try to compile a downstream CMake project
 
 about:
   home: https://github.com/mctools/ncrystal
