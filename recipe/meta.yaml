@@ -1,6 +1,8 @@
 {% set version = "3.9.82" %}
 
 package:
+  #Fixme: I think we ultimately need to rename this back to "ncrystal", since
+  #the rerendered docs otherwise refers to "ncrystal-suite-feedstock"
   name: ncrystal-suite
   version: {{ version }}
 
@@ -37,13 +39,8 @@ outputs:
     test:
       requires:
         - cmake >=3.25
-      commands:
-        - ncrystal-config --help
-        - ncrystal-config -s
-        - test -f $(ncrystal-config --show libpath)
-        - test -f $(ncrystal-config --show shlibpath)
-        - test -d $(ncrystal-config --show includedir)
-        - cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
+      script: test_core.sh  # [unix]
+      script: test_core.bat  # [win]
 
   - name: ncrystal-python
     #For some reason putting the pip install command inline here does not work,
@@ -102,7 +99,8 @@ outputs:
         - ncrystal_verifyatompos --help
         - nctool --test
         - cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
-        #Fixme: Also actually try to compile a downstream CMake project
+        #Fixme: Also actually try to compile a downstream CMake project (there
+        #is one in ./src/examples/downstream_cmake
 
 about:
   home: https://github.com/mctools/ncrystal
