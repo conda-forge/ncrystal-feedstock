@@ -105,6 +105,7 @@ outputs:
         - python {{ python_min }}
         - pip
         - cmake >=3.25
+        - make  # [not win]
         - cxx-compiler
         - scikit-build-core >=0.10
         - setuptools >=64.0
