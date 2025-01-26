@@ -1,4 +1,4 @@
-{% set version = "3.9.82" %}
+{% set version = "3.9.83" %}
 
 #Notice: Due to https://github.com/conda/conda-build/issues/5424 we can't have
 #any inline python commands based on the PYTHON jinja variable. So all such
@@ -12,8 +12,8 @@ package:
 
 source:
   #fixme:
-  url: https://github.com/mctools/ncrystal/archive/06537e88.tar.gz
-  sha256: b203cfd6c688224d371dc6f227352e6056d1bd33c23d0710c5ca8119d633485c
+  url: https://github.com/mctools/ncrystal/archive/82e36db4.tar.gz
+  sha256: 4a60ac4301fb5771e09d69bd36af1b72d868e0a7546dced42c0efe1ac380cc6d
   folder: src
 
 build:
