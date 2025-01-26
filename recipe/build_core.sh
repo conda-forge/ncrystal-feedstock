@@ -2,7 +2,7 @@
 set -eux
 mkdir -p build_core
 
-#NOTICE: Keep synchronized with with build_core.bat
+#NOTICE: Keep synchronized with build_core.bat
 
 test -f "${SRC_DIR}/src/ncrystal_core/include/NCrystal/NCrystal.hh"
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# NOTICE: Keep synchronized with with test_core.bat
+# NOTICE: Keep synchronized with test_core.bat
 
 set -eu
 
