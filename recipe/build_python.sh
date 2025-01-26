@@ -4,8 +4,15 @@ test -f "${SRC_DIR}/src/ncrystal_python/pyproject.toml"
 
 echo "TKTEST DOLLAR-PYTHON: ${PYTHON:-undefined}"
 echo "TKTEST DOLLAR-CONDA_PREFIX: ${CONDA_PREFIX:-undefined}"
+echo "TKTEST DOLLAR-PREFIX: ${PREFIX:-undefined}"
 echo "TKTEST ls DOLLAR-CONDA_PREFIX/bin:"
-ls -l ${CONDA_PREFIX:-undefined}/bin
+if [ -d ${CONDA_PREFIX:-undefined}/bin ]; then
+    ls -l ${CONDA_PREFIX:-undefined}/bin
+fi
+echo "TKTEST ls DOLLAR-PREFIX/bin:"
+if [ -d ${PREFIX:-undefined}/bin ]; then
+    ls -l ${PREFIX:-undefined}/bin
+fi
 echo "TKTEST which python"
 which python
 
