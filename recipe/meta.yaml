@@ -82,7 +82,12 @@ outputs:
 
   - name: ncrystal
     #Fixme: Should "pip list" show ncrystal as being installed? To prevent pip
-    #installs in the conda environment from pulling in ncrystal from pypi?
+    #installs in the conda environment from pulling in ncrystal from pypi? To do
+    #that, we can simply pip install the ./src/ncrystal_metapkg. However, we
+    #also need an ncrystal_core dummy metapkg in this case, or pip check will
+    #fail. Or perhaps ncrystal-core should be split up, so ncrystal-core-nopy
+    #will contain the actual files, and ncrystal-core will provide the dummy
+    #python module?
     build:
       noarch: generic
     requirements:
@@ -93,7 +98,7 @@ outputs:
         #ncrystal packages:
         - python
         - ncrystal-core ={{ version }}
-        - ncrystal-python={{ version }}
+        - ncrystal-python ={{ version }}
     test:
       requires:
         - python
