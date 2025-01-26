@@ -1,9 +1,5 @@
 {% set version = "3.9.83" %}
 
-#Notice: Due to https://github.com/conda/conda-build/issues/5424 we can't have
-#any inline python commands based on the PYTHON jinja variable. So all such
-#commands go in .sh/.bat.
-
 package:
   #Fixme: I think we ultimately need to rename this back to "ncrystal", since
   #the rerendered docs otherwise refers to "ncrystal-suite-feedstock"
@@ -83,29 +79,23 @@ outputs:
         - pip show ncrystal-python
 
   - name: ncrystal
-    #Fixme: Should "pip list" show ncrystal as being installed? To prevent pip
-    #installs in the conda environment from pulling in ncrystal from pypi? To do
-    #that, we can simply pip install the ./src/ncrystal_metapkg. However, we
-    #also need an ncrystal_core dummy metapkg in this case, or pip check will
-    #fail. Or perhaps ncrystal-core should be split up, so ncrystal-core-nopy
-    #will contain the actual files, and ncrystal-core will provide the dummy
-    #python module?
+    script: build_ncrystal.sh  # [unix]
+    script: build_ncrystal.bat  # [win]
     build:
-      noarch: generic
+      noarch: python
     requirements:
       host:
         - python
       run:
-        #The ncrystal meta package ensures version matching between the other
-        #ncrystal packages:
         - python
+        #Exact version pinning for consistent ncrystal environment:
         - ncrystal-core ={{ version }}
         - ncrystal-python ={{ version }}
     test:
       requires:
         - python
-        - cmake >=3.25
         - pip
+        - cmake >=3.25
       script: test_ncrystal.sh  # [unix]
       script: test_ncrystal.bat  # [win]
 

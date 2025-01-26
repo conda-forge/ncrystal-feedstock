@@ -11,11 +11,11 @@ ncrystal-config -s
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-pip check
+pip list
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-@REM fixme pip show ncrystal
+pip check
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
@@ -23,8 +23,11 @@ pip show ncrystal-python
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-@REM fixme pip show ncrystal-core
-pip list
+pip show ncrystal-cor
+
+if %errorlevel% neq 0 exit /b %errorlevel%
+
+pip show ncrystal
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
@@ -82,4 +85,3 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 
 @REM fixme stuff from ncrystal windows CI
 @REM fixme downstream cmake project
-@REM fixme pip show ncrystal, ncrystal-core, ncrystal-python commands

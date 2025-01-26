@@ -2,14 +2,13 @@
 
 # NOTICE: Keep synchronized with test_ncrystal.bat
 
-set -eu
+set -eux
 
-pip check
 pip list
-#fixme:
-#pip show ncrystal
+pip check
 pip show ncrystal-python
-#pip show ncrystal-core
+pip show ncrystal-core
+pip show ncrystal
 
 ncrystal-config --help
 ncrystal-config -s
@@ -35,7 +34,4 @@ cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXI
 
 #Fixme: Also actually try to compile a downstream CMake project (there is one in
 #./src/examples/downstream_cmake
-
-# fixme pip show ncrystal, ncrystal-core, ncrystal-python commands
-
 #fixme: also try to install a plugin and verify that it works?
