@@ -1,5 +1,5 @@
-About ncrystal-suite-feedstock
-==============================
+About ncrystal-feedstock
+========================
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/ncrystal-feedstock/blob/main/LICENSE.txt)
 
@@ -87,10 +87,10 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-ncrystal--core-green.svg)](https://anaconda.org/conda-forge/ncrystal-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ncrystal-core.svg)](https://anaconda.org/conda-forge/ncrystal-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ncrystal-core.svg)](https://anaconda.org/conda-forge/ncrystal-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ncrystal-core.svg)](https://anaconda.org/conda-forge/ncrystal-core) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-ncrystal--python-green.svg)](https://anaconda.org/conda-forge/ncrystal-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ncrystal-python.svg)](https://anaconda.org/conda-forge/ncrystal-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ncrystal-python.svg)](https://anaconda.org/conda-forge/ncrystal-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ncrystal-python.svg)](https://anaconda.org/conda-forge/ncrystal-python) |
 
-Installing ncrystal-suite
-=========================
+Installing ncrystal
+===================
 
-Installing `ncrystal-suite` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `ncrystal` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
@@ -176,17 +176,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating ncrystal-suite-feedstock
-=================================
+Updating ncrystal-feedstock
+===========================
 
-If you would like to improve the ncrystal-suite recipe or build a new
+If you would like to improve the ncrystal recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/ncrystal-suite-feedstock are
+Note that all branches in the conda-forge/ncrystal-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
