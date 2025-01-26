@@ -1,4 +1,4 @@
-@REM NOTICE: Keep synchronized with with build_core.sh
+@REM NOTICE: Keep synchronized with build_core.sh
 
 setlocal eneableextensions
 if errorlevel 1 echo Unable to enable extensions
