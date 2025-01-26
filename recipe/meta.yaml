@@ -3,7 +3,7 @@
 package:
   #Fixme: I think we ultimately need to rename this back to "ncrystal", since
   #the rerendered docs otherwise refers to "ncrystal-suite-feedstock"
-  name: ncrystal-suite
+  name: ncrystal
   version: {{ version }}
 
 source:
