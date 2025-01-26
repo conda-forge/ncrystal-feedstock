@@ -18,7 +18,7 @@ mkdir -p ./build_ds
 cmake \
     -S ./src/examples/downstream_cmake \
     -B ./build_ds \
-    -DCMAKE_BUILD_TYPE=Release" \
+    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=./install_ds
 
 cmake --build ./build_ds --config Release
