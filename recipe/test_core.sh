@@ -27,5 +27,3 @@ cmake --install ./build_ds
 test -f ./install_ds/bin/testapp
 
 ./install_ds/bin/testapp
-
-#Fixme: also test plugin?

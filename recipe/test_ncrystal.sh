@@ -4,11 +4,11 @@
 
 set -eux
 
-pip list
-pip check
-pip show ncrystal-python
-pip show ncrystal-core
-pip show ncrystal
+${PYTHON} -m pip list
+${PYTHON} -m pip check
+${PYTHON} -m pip show ncrystal-python
+${PYTHON} -m pip show ncrystal-core
+${PYTHON} -m pip show ncrystal
 
 ncrystal-config --help
 ncrystal-config -s
@@ -32,6 +32,21 @@ ncrystal_verifyatompos --help
 nctool --test
 cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
 
-#Fixme: Also actually try to compile a downstream CMake project (there is one in
-#./src/examples/downstream_cmake
-#fixme: also try to install a plugin and verify that it works?
+#Fixme: replicate the following in test_ncrystal.bat:
+
+test -f ./src/examples/ncrystal_pypluginmgr/pyproject.toml
+test -f ./src/examples/plugin/pyproject.toml
+
+${PYTHON} -m pip install ./src/examples/ncrystal_pypluginmgr -vv --no-deps --no-build-isolation
+${PYTHON} -m pip check
+${PYTHON} -m pip install ./src/examples/plugin -vv --no-deps --no-build-isolation
+${PYTHON} -m pip check
+
+export NCRYSTAL_PLUGIN_RUNTESTS=1
+export NCRYSTAL_REQUIRED_PLUGINS=DummyPlugin
+nctool --plugins
+nctool -d plugins::DummyPlugin/somefile.ncmat
+
+${PYTHON} -m pip install ./src/examples/plugin_dataonly -vv --no-deps --no-build-isolation
+${PYTHON} -m pip check
+nctool -d plugins::DummyDataPlugin/dummy.ncmat
