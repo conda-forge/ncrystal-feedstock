@@ -23,7 +23,7 @@ pip show ncrystal-python
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-pip show ncrystal-cor
+pip show ncrystal-core
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
