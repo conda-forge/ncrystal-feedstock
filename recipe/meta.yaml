@@ -13,7 +13,7 @@ package:
 source:
   #fixme:
   url: https://github.com/mctools/ncrystal/archive/82e36db4.tar.gz
-  sha256: 4a60ac4301fb5771e09d69bd36af1b72d868e0a7546dced42c0efe1ac380cc6d
+  sha256: cd3cb3a75281c5fb8a73bcce5fd71257e3014cc5d97bb2dc8803d196ffa5badd
   folder: src
 
 build:
