@@ -1,8 +1,6 @@
 {% set version = "3.9.83" %}
 
 package:
-  #Fixme: I think we ultimately need to rename this back to "ncrystal", since
-  #the rerendered docs otherwise refers to "ncrystal-suite-feedstock"
   name: ncrystal-suite
   version: {{ version }}
 
@@ -21,6 +19,11 @@ outputs:
     script: build_core.sh  # [unix]
     script: build_core.bat  # [win]
     build:
+      #If building against ncrystal-core, ncrystal-core is almost always also
+      #needed at runtime as well, so we could consider enabling the following:
+      #run_exports:
+      #  strong:
+      #    - ncrystal-core
       ignore_run_exports_from:
         - python
     requirements:
@@ -31,14 +34,14 @@ outputs:
         - {{ compiler('c') }}
         - {{ stdlib("c") }}
       host:
-        - python  # note that python is only used to convert ncmat->C++ code
-      run:
-        #fixme: we just want to not have an empty section for now, and nothing
-        #using python
-        - zlib
+        - python  # note that python is only used to convert ncmat->C++ code,
+                  # hence the ignore_run_exports_from python above.
+      #NB: no explicit run: dependencies!
     test:
       requires:
         - cmake >=3.25
+      source_files:
+        - ./src/examples
       script: test_core.sh  # [unix]
       script: test_core.bat  # [win]
 
@@ -103,8 +106,6 @@ outputs:
         - cmake >=3.25
       script: test_ncrystal.sh  # [unix]
       script: test_ncrystal.bat  # [win]
-
-#fixme: also ncrystal-pypluginmgr ??
 
 about:
   home: https://github.com/mctools/ncrystal
