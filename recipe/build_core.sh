@@ -1,10 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -eux
 mkdir -p build_core
 
 #NOTICE: Keep synchronized with with build_core.bat
 
 test -f "${SRC_DIR}/src/ncrystal_core/include/NCrystal/NCrystal.hh"
+
+echo "TKTEST DOLLAR-PYTHON: ${PYTHON:-undefined}"
+echo "TKTEST DOLLAR-CONDA_PREFIX: ${CONDA_PREFIX:-undefined}"
+echo "TKTEST ls DOLLAR-CONDA_PREFIX/bin:"
+ls -l ${CONDA_PREFIX:-undefined}/bin
 
 cmake \
     -B ./build_core \
