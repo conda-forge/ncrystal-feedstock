@@ -3,7 +3,7 @@
 package:
   #Fixme: I think we ultimately need to rename this back to "ncrystal", since
   #the rerendered docs otherwise refers to "ncrystal-suite-feedstock"
-  name: ncrystal
+  name: ncrystal-suite
   version: {{ version }}
 
 source:
@@ -103,6 +103,8 @@ outputs:
         - cmake >=3.25
       script: test_ncrystal.sh  # [unix]
       script: test_ncrystal.bat  # [win]
+
+#fixme: also ncrystal-pypluginmgr ??
 
 about:
   home: https://github.com/mctools/ncrystal
