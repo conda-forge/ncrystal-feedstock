@@ -84,16 +84,21 @@ outputs:
     build:
       noarch: python
     requirements:
+      build:
+        - python  {{ python_min }}  # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
       host:
-        - python
+        - python  {{ python_min }}
+        - pip
+        - setuptools >=64.0
       run:
-        - python
+        - python >={{ python_min }}
         #Exact version pinning for consistent ncrystal environment:
         - ncrystal-core ={{ version }}
         - ncrystal-python ={{ version }}
     test:
       requires:
-        - python
+        - python {{ python_min }}
         - pip
         - cmake >=3.25
       script: test_ncrystal.sh  # [unix]
