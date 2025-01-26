@@ -15,7 +15,7 @@ pip check
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-%PYTHON% -c 'import NCrystal; NCrystal.test()'
+%PYTHON% -c "import NCrystal; NCrystal.test()"
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
