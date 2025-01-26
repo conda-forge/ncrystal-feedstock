@@ -5,10 +5,6 @@
 {% set PYTHON = "python" %}
 {% endif %}
 
-{% if python_min is not defined %}
-{% set python_min = "3.10" %}
-{% endif %}
-
 package:
   #Fixme: I think we ultimately need to rename this back to "ncrystal", since
   #the rerendered docs otherwise refers to "ncrystal-suite-feedstock"
@@ -91,16 +87,16 @@ outputs:
       noarch: generic
     requirements:
       host:
-        - python {{ python_min }}
+        - python
       run:
         #The ncrystal meta package ensures version matching between the other
         #ncrystal packages:
-        - python >={{ python_min }}
+        - python
         - ncrystal-core ={{ version }}
         - ncrystal-python={{ version }}
     test:
       requires:
-        - python {{ python_min }}
+        - python
         - cmake >=3.25
         - pip
       imports:
