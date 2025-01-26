@@ -105,6 +105,12 @@ outputs:
         - python {{ python_min }}
         - pip
         - cmake >=3.25
+        - cxx-compiler
+        - scikit-build-core >=0.10
+        - setuptools >=64.0
+      source_files:
+        - ./src/examples
+        - ./src/ncrystal_pypluginmgr
       script: test_ncrystal.sh  # [unix]
       script: test_ncrystal.bat  # [win]
 

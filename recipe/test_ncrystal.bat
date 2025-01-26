@@ -11,23 +11,23 @@ ncrystal-config -s
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-pip list
+%PYTHON% -m pip list
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-pip check
+%PYTHON% -m pip check
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-pip show ncrystal-python
+%PYTHON% -m pip show ncrystal-python
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-pip show ncrystal-core
+%PYTHON% -m pip show ncrystal-core
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-pip show ncrystal
+%PYTHON% -m pip show ncrystal
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
