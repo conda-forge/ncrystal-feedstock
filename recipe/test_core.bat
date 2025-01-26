@@ -15,4 +15,5 @@ cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXI
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
+@REM fixme test files from ncrystal-config --show libpath/shlibpath/includedir exist
 @REM fixme stuff from ncrystal windows CI

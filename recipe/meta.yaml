@@ -1,9 +1,8 @@
 {% set version = "3.9.82" %}
 
-#Workaround for https://github.com/conda/conda-build/issues/5424:
-{% if PYTHON is not defined %}
-{% set PYTHON = "python" %}
-{% endif %}
+#Notice: Due to https://github.com/conda/conda-build/issues/5424 we can't have
+#any inline python commands based on the PYTHON jinja variable. So all such
+#commands go in .sh/.bat.
 
 package:
   #Fixme: I think we ultimately need to rename this back to "ncrystal", since
@@ -104,27 +103,8 @@ outputs:
         - python
         - cmake >=3.25
         - pip
-      imports:
-        - NCrystal
-      commands:
-        - pip check
-        - ncrystal-config --help
-        - ncrystal-config -s
-        #fixme - {{ PYTHON }} -c 'import NCrystal; NCrystal.test()'
-        #fixme - {{ PYTHON }} -mNCrystal.test cmdline
-        - nctool --help
-        - ncrystal_cif2ncmat --help
-        - ncrystal_endf2ncmat --help
-        - ncrystal_hfg2ncmat --help
-        - ncrystal_mcstasunion --help
-        - ncrystal_ncmat2cpp --help
-        - ncrystal_ncmat2hkl --help
-        - ncrystal_vdos2ncmat --help
-        - ncrystal_verifyatompos --help
-        - nctool --test
-        - cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
-        #Fixme: Also actually try to compile a downstream CMake project (there
-        #is one in ./src/examples/downstream_cmake
+      script: test_ncrystal.sh  # [unix]
+      script: test_ncrystal.bat  # [win]
 
 about:
   home: https://github.com/mctools/ncrystal
