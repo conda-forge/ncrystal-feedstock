@@ -5,6 +5,12 @@
 set -eu
 
 pip check
+pip list
+#fixme:
+#pip show ncrystal
+pip show ncrystal-python
+#pip show ncrystal-core
+
 ncrystal-config --help
 ncrystal-config -s
 test -f $(ncrystal-config --show libpath)

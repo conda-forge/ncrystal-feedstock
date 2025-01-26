@@ -15,6 +15,19 @@ pip check
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
+@REM fixme pip show ncrystal
+
+if %errorlevel% neq 0 exit /b %errorlevel%
+
+pip show ncrystal-python
+
+if %errorlevel% neq 0 exit /b %errorlevel%
+
+@REM fixme pip show ncrystal-core
+pip list
+
+if %errorlevel% neq 0 exit /b %errorlevel%
+
 %PYTHON% -c "import NCrystal; NCrystal.test()"
 
 if %errorlevel% neq 0 exit /b %errorlevel%
