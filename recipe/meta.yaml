@@ -6,8 +6,8 @@ package:
 
 source:
   #fixme:
-  url: https://github.com/mctools/ncrystal/archive/82e36db4.tar.gz
-  sha256: cd3cb3a75281c5fb8a73bcce5fd71257e3014cc5d97bb2dc8803d196ffa5badd
+  url: https://github.com/mctools/ncrystal/archive/6a4ce35f.tar.gz
+  sha256: a4b0c28866ff2a68a5add1910815c992bf064f80816cdb01696d8c330ad3d64f
   folder: src
 
 build:
@@ -110,9 +110,10 @@ outputs:
         - cxx-compiler
         - scikit-build-core >=0.10
         - setuptools >=64.0
+        - ruff
+        - tomli
       source_files:
-        - ./src/examples
-        - ./src/ncrystal_pypluginmgr
+        - ./src
       script: test_ncrystal.sh  # [unix]
       script: test_ncrystal.bat  # [win]
 
