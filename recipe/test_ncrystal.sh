@@ -11,7 +11,8 @@ ${PYTHON} -m pip show ncrystal-core
 ${PYTHON} -m pip show ncrystal
 
 #fixme Replicate to .bat:
-${PYTHON} ./src/devel/bin/ncdevtool verifytag -p "v${PKG_VERSION}" --fail-if-devel --file-verify=VERSION
+#fixme add --fail-if-devel to next line once out of development:
+${PYTHON} ./src/devel/bin/ncdevtool verifytag -t "${PKG_VERSION}" -p 'X.Y.Z' --file-verify=VERSION
 ${PYTHON} ./src/devel/bin/ncdevtool check -n fixme
 
 ncrystal-config --help
