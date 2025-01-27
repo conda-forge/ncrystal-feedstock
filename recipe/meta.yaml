@@ -112,6 +112,7 @@ outputs:
         - setuptools >=64.0
         - ruff
         - tomli
+        - git
       source_files:
         - ./src
       script: test_ncrystal.sh  # [unix]
