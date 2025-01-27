@@ -40,6 +40,7 @@ outputs:
     test:
       requires:
         - cmake >=3.25
+        - make  # [not win]
         - cxx-compiler
       source_files:
         - ./src/examples
