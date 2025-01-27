@@ -10,6 +10,10 @@ ${PYTHON} -m pip show ncrystal-python
 ${PYTHON} -m pip show ncrystal-core
 ${PYTHON} -m pip show ncrystal
 
+#fixme Replicate to .bat:
+${PYTHON} ./src/devel/bin/ncdevtool verifytag -p "v${PKG_VERSION}" --fail-if-devel --file-verify=VERSION
+${PYTHON} ./src/devel/bin/ncdevtool check -n fixme
+
 ncrystal-config --help
 ncrystal-config -s
 test -f $(ncrystal-config --show libpath)
