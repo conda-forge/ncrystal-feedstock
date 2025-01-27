@@ -17,13 +17,16 @@ mkdir -p ./build_ds
 cmake \
     -S ./src/examples/downstream_cmake \
     -B ./build_ds \
+    ${CMAKE_ARGS} \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=./install_ds \
-    ${CMAKE_ARGS}
+    -DCMAKE_INSTALL_PREFIX=./install_ds
 
 cmake --build ./build_ds --config Release
 cmake --install ./build_ds
 
+ls -l ./install_ds || true
+ls -l ./install_ds/bin || true
+tree ./install_ds || true
 test -f ./install_ds/bin/testapp
 
 ./install_ds/bin/testapp
