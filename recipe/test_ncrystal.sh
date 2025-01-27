@@ -34,10 +34,10 @@ cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXI
 
 #Fixme: replicate the following in test_ncrystal.bat:
 
-test -f ./src/examples/ncrystal_pypluginmgr/pyproject.toml
+test -f ./src/ncrystal_pypluginmgr/pyproject.toml
 test -f ./src/examples/plugin/pyproject.toml
 
-${PYTHON} -m pip install ./src/examples/ncrystal_pypluginmgr -vv --no-deps --no-build-isolation
+${PYTHON} -m pip install ./src/ncrystal_pypluginmgr -vv --no-deps --no-build-isolation
 ${PYTHON} -m pip check
 ${PYTHON} -m pip install ./src/examples/plugin -vv --no-deps --no-build-isolation
 ${PYTHON} -m pip check
