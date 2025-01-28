@@ -111,6 +111,7 @@ outputs:
         - scikit-build-core >=0.10
         - setuptools >=64.0
         - ruff
+        - pyyaml
         - tomli
         - git
       source_files:
