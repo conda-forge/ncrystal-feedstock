@@ -24,7 +24,7 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 @REM fixme add --fail-if-devel to next line once out of development
-%PYTHON% %CD%\src\devel\bin\ncdevtool verifytag -t "%PKG_VERSION%" -p 'X.Y.Z' --file-verify=VERSION
+%PYTHON% %CD%\src\devel\bin\ncdevtool verifytag -t "%PKG_VERSION%" -p "X.Y.Z" --file-verify=VERSION
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
