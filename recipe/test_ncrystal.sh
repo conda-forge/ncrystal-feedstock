@@ -37,8 +37,6 @@ ncrystal_verifyatompos --help
 nctool --test
 cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
 
-#Fixme: replicate the following in test_ncrystal.bat:
-
 test -f ./src/ncrystal_pypluginmgr/pyproject.toml
 test -f ./src/examples/plugin/pyproject.toml
 
@@ -50,6 +48,8 @@ ${PYTHON} -m pip check
 export NCRYSTAL_PLUGIN_RUNTESTS=1
 export NCRYSTAL_REQUIRED_PLUGINS=DummyPlugin
 nctool --plugins
+unset NCRYSTAL_PLUGIN_RUNTESTS
+unset NCRYSTAL_REQUIRED_PLUGINS
 nctool -d plugins::DummyPlugin/somefile.ncmat
 
 ${PYTHON} -m pip install ./src/examples/plugin_dataonly -vv --no-deps --no-build-isolation

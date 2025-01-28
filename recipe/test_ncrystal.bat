@@ -3,14 +3,6 @@
 setlocal eneableextensions
 if errorlevel 1 echo Unable to enable extensions
 
-ncrystal-config --help
-
-if %errorlevel% neq 0 exit /b %errorlevel%
-
-ncrystal-config -s
-
-if %errorlevel% neq 0 exit /b %errorlevel%
-
 %PYTHON% -m pip list
 
 if %errorlevel% neq 0 exit /b %errorlevel%
@@ -31,11 +23,25 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
+@REM fixme add --fail-if-devel to next line once out of development
+%PYTHON% %CD%\src\devel\bin\ncdevtool verifytag -t "%PKG_VERSION%" -p 'X.Y.Z' --file-verify=VERSION
+%PYTHON% %CD%\src\devel\bin\ncdevtool check -n fixme
+
+ncrystal-config --help
+
+if %errorlevel% neq 0 exit /b %errorlevel%
+
+ncrystal-config -s
+
+@REM fixme test output of various ncrystal-config exists like in test_ncrystal.sh
+
+if %errorlevel% neq 0 exit /b %errorlevel%
+
 %PYTHON% -c "import NCrystal; NCrystal.test()"
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-%PYTHON% -mNCrystal.test cmdline
+%PYTHON% "-mNCrystal.test" cmdline
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
@@ -82,6 +88,25 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
 
 if %errorlevel% neq 0 exit /b %errorlevel%
+
+%PYTHON% -m pip install %CD%\src\ncrystal_pypluginmgr -vv --no-deps --no-build-isolation
+%PYTHON% -m pip check
+%PYTHON% -m pip install %CD%\src\examples\plugin -vv --no-deps --no-build-isolation
+%PYTHON% -m pip check
+
+if NOT EXIST %CD%\src\ncrystal_pypluginmgr\pyproject.toml exit /b 1
+if NOT EXIST %CD%\src\examples\plugin\pyproject.toml exit /b 1
+
+set "NCRYSTAL_PLUGIN_RUNTESTS=1"
+set "NCRYSTAL_REQUIRED_PLUGINS=DummyPlugin"
+nctool --plugins
+set "NCRYSTAL_PLUGIN_RUNTESTS="
+set "NCRYSTAL_REQUIRED_PLUGINS="
+nctool -d "plugins::DummyPlugin/somefile.ncmat"
+
+%PYTHON% -m pip install %CD%\src\examples\plugin_dataonly -vv --no-deps --no-build-isolation
+%PYTHON% -m pip check
+nctool -d "plugins::DummyDataPlugin/dummy.ncmat"
 
 @REM fixme stuff from ncrystal windows CI
 @REM fixme downstream cmake project
