@@ -6,8 +6,8 @@ package:
 
 source:
   #fixme:
-  url: https://github.com/mctools/ncrystal/archive/56fbeba.tar.gz
-  sha256: 3c75458860495805115dfc7c0e6a86dec6d6d028a197384524fa21fd23a80cc1
+  url: https://github.com/mctools/ncrystal/archive/88a3170.tar.gz
+  sha256: b4a7b796b64d937669ea7eaaa9d9bfa30b534c7687caaf35ac7ff24331d9379a
   folder: src
 
 build:
