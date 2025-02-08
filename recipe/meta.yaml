@@ -119,6 +119,26 @@ outputs:
       script: test_ncrystal.sh  # [unix]
       script: test_ncrystal.bat  # [win]
 
+  - name: ncrystal-all
+    build:
+      noarch: generic
+    requirements:
+      run:
+        #Exact version pinning for consistent ncrystal environment:
+        - ncrystal ={{ version }}
+        - ncrystal-core ={{ version }}
+        - ncrystal-python ={{ version }}
+        - ase !=3.24.*
+        - gemmi >=0.6.1
+        - spglib >=2.1.0
+        - matplotlib >=3.7.0
+    test:
+      requires:
+        - python {{ python_min }}
+        - pip
+      commands:
+        - pip check
+
 about:
   home: https://github.com/mctools/ncrystal
   summary: Library for thermal neutron transport in crystals and other materials.
