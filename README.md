@@ -84,6 +84,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-ncrystal-green.svg)](https://anaconda.org/conda-forge/ncrystal) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ncrystal.svg)](https://anaconda.org/conda-forge/ncrystal) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ncrystal.svg)](https://anaconda.org/conda-forge/ncrystal) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ncrystal.svg)](https://anaconda.org/conda-forge/ncrystal) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-ncrystal--all-green.svg)](https://anaconda.org/conda-forge/ncrystal-all) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ncrystal-all.svg)](https://anaconda.org/conda-forge/ncrystal-all) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ncrystal-all.svg)](https://anaconda.org/conda-forge/ncrystal-all) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ncrystal-all.svg)](https://anaconda.org/conda-forge/ncrystal-all) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-ncrystal--core-green.svg)](https://anaconda.org/conda-forge/ncrystal-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ncrystal-core.svg)](https://anaconda.org/conda-forge/ncrystal-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ncrystal-core.svg)](https://anaconda.org/conda-forge/ncrystal-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ncrystal-core.svg)](https://anaconda.org/conda-forge/ncrystal-core) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-ncrystal--python-green.svg)](https://anaconda.org/conda-forge/ncrystal-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/ncrystal-python.svg)](https://anaconda.org/conda-forge/ncrystal-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ncrystal-python.svg)](https://anaconda.org/conda-forge/ncrystal-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/ncrystal-python.svg)](https://anaconda.org/conda-forge/ncrystal-python) |
 
@@ -97,16 +98,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `ncrystal, ncrystal-core, ncrystal-python` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `ncrystal, ncrystal-all, ncrystal-core, ncrystal-python` can be installed with `conda`:
 
 ```
-conda install ncrystal ncrystal-core ncrystal-python
+conda install ncrystal ncrystal-all ncrystal-core ncrystal-python
 ```
 
 or with `mamba`:
 
 ```
-mamba install ncrystal ncrystal-core ncrystal-python
+mamba install ncrystal ncrystal-all ncrystal-core ncrystal-python
 ```
 
 It is possible to list all of the versions of `ncrystal` available on your platform with `conda`:
