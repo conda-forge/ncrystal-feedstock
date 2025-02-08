@@ -131,7 +131,7 @@ outputs:
         - ase !=3.24.*
         - gemmi >=0.6.1
         - spglib >=2.1.0
-        - matplotlib >=3.7.0
+        - matplotlib-base >=3.7.0
     test:
       requires:
         - python {{ python_min }}
