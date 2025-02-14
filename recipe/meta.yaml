@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
 
 outputs:
   - name: ncrystal-core
@@ -42,7 +42,7 @@ outputs:
         - make  # [not win]
         - cxx-compiler
       source_files:
-        - ./src/examples
+        - ./src/examples/downstream_cmake
       script: test_core.sh  # [unix]
       script: test_core.bat  # [win]
 
@@ -106,6 +106,7 @@ outputs:
         - pip
         - cmake >=3.25
         - make  # [not win]
+        - c-compiler
         - cxx-compiler
         - scikit-build-core >=0.10
         - setuptools >=64.0
@@ -113,8 +114,11 @@ outputs:
         - pyyaml
         - tomli
         - git
-      source_files:
-        - ./src
+        #Gemmi is not ready on aarch64, so we pip install it manually in test_ncrystal.sh:
+        - gemmi  # [not aarch64]
+        - mpmath
+        - spglib
+        - ase <3.24.0
       script: test_ncrystal.sh  # [unix]
       script: test_ncrystal.bat  # [win]
 
