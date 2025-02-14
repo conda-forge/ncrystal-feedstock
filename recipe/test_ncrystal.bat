@@ -23,12 +23,14 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-@REM fixme add --fail-if-devel to next line once out of development
-%PYTHON% %CD%\src\devel\bin\ncdevtool verifytag -t "%PKG_VERSION%" -p "X.Y.Z" --file-verify=VERSION
+@REM see comments in test_ncrystal.sh for why we clone:
+git clone --depth 1 --branch "v%PKG_VERSION%" "https://github.com/mctools/ncrystal" .\src2
+
+%PYTHON% %CD%\src2\devel\bin\ncdevtool verifytag -t "%PKG_VERSION%" --fail-if-devel -p "X.Y.Z" --file-verify=VERSION
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-%PYTHON% %CD%\src\devel\bin\ncdevtool check -n fixme
+%PYTHON% %CD%\src2\devel\bin\ncdevtool check -n fixme
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
@@ -94,18 +96,18 @@ cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXI
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-%PYTHON% -m pip install %CD%\src\ncrystal_pypluginmgr -vv --no-deps --no-build-isolation
+%PYTHON% -m pip install %CD%\src2\ncrystal_pypluginmgr -vv --no-deps --no-build-isolation
 if %errorlevel% neq 0 exit /b %errorlevel%
 %PYTHON% -m pip check
 if %errorlevel% neq 0 exit /b %errorlevel%
-%PYTHON% -m pip install %CD%\src\examples\plugin -vv --no-deps --no-build-isolation
+%PYTHON% -m pip install %CD%\src2\examples\plugin -vv --no-deps --no-build-isolation
 if %errorlevel% neq 0 exit /b %errorlevel%
 %PYTHON% -m pip check
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-if NOT EXIST %CD%\src\ncrystal_pypluginmgr\pyproject.toml exit /b 1
+if NOT EXIST %CD%\src2\ncrystal_pypluginmgr\pyproject.toml exit /b 1
 
-if NOT EXIST %CD%\src\examples\plugin\pyproject.toml exit /b 1
+if NOT EXIST %CD%\src2\examples\plugin\pyproject.toml exit /b 1
 
 set "NCRYSTAL_PLUGIN_RUNTESTS=1"
 if %errorlevel% neq 0 exit /b %errorlevel%
@@ -120,7 +122,7 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 nctool -d "plugins::DummyPlugin/somefile.ncmat"
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-%PYTHON% -m pip install %CD%\src\examples\plugin_dataonly -vv --no-deps --no-build-isolation
+%PYTHON% -m pip install %CD%\src2\examples\plugin_dataonly -vv --no-deps --no-build-isolation
 if %errorlevel% neq 0 exit /b %errorlevel%
 %PYTHON% -m pip check
 if %errorlevel% neq 0 exit /b %errorlevel%
@@ -129,3 +131,6 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 
 @REM fixme stuff from ncrystal windows CI
 @REM fixme downstream cmake project
+
+@REM #Finally run CTests:
+%PYTHON% %CD%\src2\devel\bin\ncdevtool cmake
