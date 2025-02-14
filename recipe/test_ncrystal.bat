@@ -26,7 +26,7 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 @REM see comments in test_ncrystal.sh for why we clone:
 @REM git clone --depth 1 --branch "v%PKG_VERSION%" "https://github.com/mctools/ncrystal" .\src2
 @REM FIXME TESTING
-git clone --depth 1 --branch 7b7751ea "https://github.com/mctools/ncrystal" .\src2
+git clone --depth 1 --branch tk_volatile "https://github.com/mctools/ncrystal" .\src2
 
 %PYTHON% %CD%\src2\devel\bin\ncdevtool verifytag -t "%PKG_VERSION%" --fail-if-devel -p "X.Y.Z" --file-verify=VERSION
 
