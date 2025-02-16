@@ -10,10 +10,13 @@ ${PYTHON} -m pip show ncrystal-python
 ${PYTHON} -m pip show ncrystal-core
 ${PYTHON} -m pip show ncrystal
 
-#fixme Replicate to .bat:
-#fixme add --fail-if-devel to next line once out of development:
-${PYTHON} ./src/devel/bin/ncdevtool verifytag -t "${PKG_VERSION}" -p 'X.Y.Z' --file-verify=VERSION
-${PYTHON} ./src/devel/bin/ncdevtool check -n fixme
+#To avoid the ncrystal packages becoming gargantuan (~megabytes as opposed to to
+#kilobytes), we fetch the code manually again (rather silly, but so is 2MB
+#metapackages!)
+git clone --depth 1 --branch "v${PKG_VERSION}" "https://github.com/mctools/ncrystal" ./src2
+
+${PYTHON} ./src2/devel/bin/ncdevtool verifytag -t "${PKG_VERSION}" --fail-if-devel -p 'X.Y.Z' --file-verify=VERSION
+${PYTHON} ./src2/devel/bin/ncdevtool check -n fixme
 
 ncrystal-config --help
 ncrystal-config -s
@@ -37,12 +40,12 @@ ncrystal_verifyatompos --help
 nctool --test
 cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
 
-test -f ./src/ncrystal_pypluginmgr/pyproject.toml
-test -f ./src/examples/plugin/pyproject.toml
+test -f ./src2/ncrystal_pypluginmgr/pyproject.toml
+test -f ./src2/examples/plugin/pyproject.toml
 
-${PYTHON} -m pip install ./src/ncrystal_pypluginmgr -vv --no-deps --no-build-isolation
+${PYTHON} -m pip install ./src2/ncrystal_pypluginmgr -vv --no-deps --no-build-isolation
 ${PYTHON} -m pip check
-${PYTHON} -m pip install ./src/examples/plugin -vv --no-deps --no-build-isolation
+${PYTHON} -m pip install ./src2/examples/plugin -vv --no-deps --no-build-isolation
 ${PYTHON} -m pip check
 
 export NCRYSTAL_PLUGIN_RUNTESTS=1
@@ -52,6 +55,11 @@ unset NCRYSTAL_PLUGIN_RUNTESTS
 unset NCRYSTAL_REQUIRED_PLUGINS
 nctool -d plugins::DummyPlugin/somefile.ncmat
 
-${PYTHON} -m pip install ./src/examples/plugin_dataonly -vv --no-deps --no-build-isolation
+${PYTHON} -m pip install ./src2/examples/plugin_dataonly -vv --no-deps --no-build-isolation
 ${PYTHON} -m pip check
 nctool -d plugins::DummyDataPlugin/dummy.ncmat
+
+#Finally run CTests as an extra platform validation:
+#(workaround for missing gemmi on linux-aarch64):
+${PYTHON} -c 'import gemmi' || pip install gemmi
+${PYTHON} ./src2/devel/bin/ncdevtool cmake
