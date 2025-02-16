@@ -1,6 +1,6 @@
 @REM NOTICE: Keep synchronized with test_ncrystal.sh
 
-setlocal eneableextensions
+setlocal enableextensions
 if errorlevel 1 echo Unable to enable extensions
 
 %PYTHON% -m pip list
@@ -23,19 +23,6 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-@REM see comments in test_ncrystal.sh for why we clone:
-@REM git clone --depth 1 --branch "v%PKG_VERSION%" "https://github.com/mctools/ncrystal" .\src2
-@REM FIXME TESTING
-git clone --depth 1 --branch tk_volatile "https://github.com/mctools/ncrystal" .\src2
-
-%PYTHON% %CD%\src2\devel\bin\ncdevtool verifytag -t "%PKG_VERSION%" --fail-if-devel -p "X.Y.Z" --file-verify=VERSION
-
-if %errorlevel% neq 0 exit /b %errorlevel%
-
-%PYTHON% %CD%\src2\devel\bin\ncdevtool check -n fixme
-
-if %errorlevel% neq 0 exit /b %errorlevel%
-
 ncrystal-config --help
 
 if %errorlevel% neq 0 exit /b %errorlevel%
@@ -50,7 +37,7 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-%PYTHON% "-mNCrystal.test" cmdline
+%PYTHON% -m "NCrystal.test" cmdline
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
@@ -98,41 +85,54 @@ cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXI
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-%PYTHON% -m pip install %CD%\src2\ncrystal_pypluginmgr -vv --no-deps --no-build-isolation
+%PYTHON% -m pip install ncrystal-pypluginmgr -vv --no-deps --no-build-isolation
+
 if %errorlevel% neq 0 exit /b %errorlevel%
+
 %PYTHON% -m pip check
+
 if %errorlevel% neq 0 exit /b %errorlevel%
-%PYTHON% -m pip install %CD%\src2\examples\plugin -vv --no-deps --no-build-isolation
+
+%PYTHON% -m pip install "git+https://github.com/mctools/ncrystal@v%PKG_VERSION%#subdirectory=examples/plugin" -vv --no-deps --no-build-isolation
+
 if %errorlevel% neq 0 exit /b %errorlevel%
+
 %PYTHON% -m pip check
+
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-if NOT EXIST %CD%\src2\ncrystal_pypluginmgr\pyproject.toml exit /b 1
+ncrystal-pluginmanager --test DummyPlugin
 
-if NOT EXIST %CD%\src2\examples\plugin\pyproject.toml exit /b 1
+if %errorlevel% neq 0 exit /b %errorlevel%
 
-set "NCRYSTAL_PLUGIN_RUNTESTS=1"
-if %errorlevel% neq 0 exit /b %errorlevel%
-set "NCRYSTAL_REQUIRED_PLUGINS=DummyPlugin"
-if %errorlevel% neq 0 exit /b %errorlevel%
-nctool --plugins
-if %errorlevel% neq 0 exit /b %errorlevel%
-set "NCRYSTAL_PLUGIN_RUNTESTS="
-if %errorlevel% neq 0 exit /b %errorlevel%
-set "NCRYSTAL_REQUIRED_PLUGINS="
-if %errorlevel% neq 0 exit /b %errorlevel%
 nctool -d "plugins::DummyPlugin/somefile.ncmat"
+
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-%PYTHON% -m pip install %CD%\src2\examples\plugin_dataonly -vv --no-deps --no-build-isolation
+%PYTHON% -m pip install "git+https://github.com/mctools/ncrystal@v%PKG_VERSION%#subdirectory=examples/plugin_dataonly" -vv --no-deps --no-build-isolation
+
 if %errorlevel% neq 0 exit /b %errorlevel%
+
 %PYTHON% -m pip check
+
 if %errorlevel% neq 0 exit /b %errorlevel%
+
+ncrystal-pluginmanager --test DummyDataPlugin
+
+if %errorlevel% neq 0 exit /b %errorlevel%
+
 nctool -d "plugins::DummyDataPlugin/dummy.ncmat"
+
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-@REM fixme stuff from ncrystal windows CI
-@REM fixme downstream cmake project
+%PYTHON% -m pip install "git+https://github.com/mctools/ncrystal@v%PKG_VERSION%#subdirectory=ncrystal_verify" -vv --no-deps --no-build-isolation
 
-@REM #Finally run CTests:
-%PYTHON% %CD%\src2\devel\bin\ncdevtool cmake
+if %errorlevel% neq 0 exit /b %errorlevel%
+
+%PYTHON% -m pip check
+
+if %errorlevel% neq 0 exit /b %errorlevel%
+
+ncrystal-verify
+
+if %errorlevel% neq 0 exit /b %errorlevel%

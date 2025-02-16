@@ -49,7 +49,7 @@ outputs:
       script: test_core.bat  # [win]
 
   - name: ncrystal-core
-    script: {{ PYTHON }} -m pip install "./src/ncrystal_core/empty_pypkg" -vv --no-deps --no-build-isolation
+    script: python -m pip install "./src/ncrystal_core/empty_pypkg" -vv --no-deps --no-build-isolation
     build:
       noarch: python
     requirements:
@@ -125,6 +125,7 @@ outputs:
         - python >={{ python_min }}
         #Exact version pinning for consistent ncrystal environment:
         - ncrystal-core ={{ version }}
+        - ncrystal-lib ={{ version }}
         - ncrystal-python ={{ version }}
     test:
       requires:
