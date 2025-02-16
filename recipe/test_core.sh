@@ -6,9 +6,12 @@ set -eux
 
 ncrystal-config --help
 ncrystal-config -s
-test -f $(ncrystal-config --show libpath)
-test -f $(ncrystal-config --show shlibpath)
-test -d $(ncrystal-config --show includedir)
+test -f "$(ncrystal-config --show libpath)"
+test -f "$(ncrystal-config --show shlibpath)"
+test -d "$(ncrystal-config --show includedir)"
+test -f "$(ncrystal-config --show includedir)/NCrystal/NCrystal.hh"
+test -f "$(ncrystal-config --show includedir)/NCrystal/ncrystal.h"
+test -f "$(ncrystal-config --show includedir)/NCrystal/ncapi.h"
 cmake --find-package -DNAME=NCrystal -DCOMPILER_ID=GNU -DLANGUAGE=CXX -DMODE=EXIST
 
 test -f ./src/examples/downstream_cmake/CMakeLists.txt
