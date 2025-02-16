@@ -1,6 +1,6 @@
 @REM NOTICE: Keep synchronized with test_core.sh
 
-setlocal eneableextensions
+setlocal enableextensions
 if errorlevel 1 echo Unable to enable extensions
 
 ncrystal-config --help
