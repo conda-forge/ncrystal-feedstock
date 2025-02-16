@@ -125,8 +125,15 @@ nctool -d "plugins::DummyDataPlugin/dummy.ncmat"
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-@REM use %PYTHON% -m pip install "git+https://github.com/mctools/ncrystal@v%PKG_VERSION%#subdirectory=ncrystal_verify" -vv --no-deps --no-build-isolation
+@REM Fixme Needed temporarily until ncrystal-verify ignores plugins:
+%PYTHON% -m pip uninstall ncrystal-plugin-DummyDataPlugin
+if %errorlevel% neq 0 exit /b %errorlevel%
+%PYTHON% -m pip uninstall ncrystal-plugin-DummyPlugin
+if %errorlevel% neq 0 exit /b %errorlevel%
+%PYTHON% -m pip check
+if %errorlevel% neq 0 exit /b %errorlevel%
 
+@REM use %PYTHON% -m pip install "git+https://github.com/mctools/ncrystal@v%PKG_VERSION%#subdirectory=ncrystal_verify" -vv --no-deps --no-build-isolation
 %PYTHON% -m pip install ncrystal-verify -vv --no-deps --no-build-isolation
 
 if %errorlevel% neq 0 exit /b %errorlevel%

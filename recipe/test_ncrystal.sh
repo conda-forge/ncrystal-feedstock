@@ -47,6 +47,11 @@ ${PYTHON} -m pip check
 ncrystal-pluginmanager --test DummyDataPlugin
 nctool -d plugins::DummyDataPlugin/dummy.ncmat
 
+#Fixme: Needed temporarily until ncrystal-verify ignores plugins:
+${PYTHON} -m pip uninstall ncrystal-plugin-DummyDataPlugin
+${PYTHON} -m pip uninstall ncrystal-plugin-DummyPlugin
+${PYTHON} -m pip check
+
 #Workaround for potentially missing gemmi on linux-aarch64:
 #${PYTHON} -c 'import gemmi' || ${PYTHON} -m pip install gemmi
 
