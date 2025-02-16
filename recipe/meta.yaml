@@ -73,12 +73,9 @@ outputs:
         - conda list
 
   - name: ncrystal-python
-    #For some reason putting the pip install command inline here does not work,
-    #so we use some scripts:
-    script: build_python.sh  # [unix]
-    script: build_python.bat  # [win]
     build:
       noarch: python
+      script: python -m pip install "./src/ncrystal_python" -vv --no-deps --no-build-isolation
       entry_points:
         - nctool = NCrystal._cli_nctool:main
         - ncrystal_cif2ncmat = NCrystal._cli_cif2ncmat:main
@@ -109,10 +106,9 @@ outputs:
         - pip show ncrystal-python
 
   - name: ncrystal
-    script: build_ncrystal.sh  # [unix]
-    script: build_ncrystal.bat  # [win]
     build:
       noarch: python
+      script: python -m pip install "./src/ncrystal_metapkg" -vv --no-deps --no-build-isolation
     requirements:
       build:
         - python  {{ python_min }}  # [build_platform != target_platform]
