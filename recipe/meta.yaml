@@ -49,9 +49,9 @@ outputs:
       script: test_core.bat  # [win]
 
   - name: ncrystal-core
-    script: python -m pip install "./src/ncrystal_core/empty_pypkg" -vv --no-deps --no-build-isolation
     build:
       noarch: python
+      script: python -m pip install "./src/ncrystal_core/empty_pypkg" -vv --no-deps --no-build-isolation
     requirements:
       build:
         - python  {{ python_min }}  # [build_platform != target_platform]
