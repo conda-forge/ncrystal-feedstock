@@ -9,7 +9,6 @@ github:
   branch_name: main
   tooling_branch_name: main
 provider:
-  #Was this (but insanely slow): linux_aarch64: default
-  linux_aarch64: azure
+  linux_aarch64: default
   #Platform seems to have problems?? (TK): linux_ppc64le: default
 test: native_and_emulated
