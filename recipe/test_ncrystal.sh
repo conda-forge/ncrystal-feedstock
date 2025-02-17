@@ -53,7 +53,7 @@ ${PYTHON} -m pip uninstall -y ncrystal-plugin-DummyPlugin
 ${PYTHON} -m pip check
 
 #Workaround for potentially missing gemmi on linux-aarch64:
-#${PYTHON} -c 'import gemmi' || ${PYTHON} -m pip install gemmi
+${PYTHON} -c 'import gemmi' || ${PYTHON} -m pip install gemmi
 
 #FIXME should use: ${PYTHON} -m pip install "git+https://github.com/mctools/ncrystal@v${PKG_VERSION}#subdirectory=ncrystal_verify" -vv --no-deps --no-build-isolation
 ${PYTHON} -m pip install ncrystal-verify -vv --no-deps --no-build-isolation
