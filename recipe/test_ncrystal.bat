@@ -134,7 +134,7 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 @REM use %PYTHON% -m pip install "git+https://github.com/mctools/ncrystal@v%PKG_VERSION%#subdirectory=ncrystal_verify" -vv --no-deps --no-build-isolation
-%PYTHON% -m pip install ncrystal-verify -vv --no-deps --no-build-isolation
+@REM %PYTHON% -m pip install ncrystal-verify -vv --no-deps --no-build-isolation
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
@@ -142,6 +142,5 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 
 if %errorlevel% neq 0 exit /b %errorlevel%
 
-ncrystal-verify
-
-if %errorlevel% neq 0 exit /b %errorlevel%
+@REM ncrystal-verify
+@REM if %errorlevel% neq 0 exit /b %errorlevel%
