@@ -125,20 +125,21 @@ outputs:
       requires:
         - python {{ python_min }}
         - pip
-        - git
+        - git >=2.40.0
         - cmake >=3.25
         - make  # [not win]
         - c-compiler
         - cxx-compiler
         - scikit-build-core >=0.10
         - setuptools >=64.0
-        - ruff
-        - pyyaml
-        - tomli
+        - ruff >=0.8.1
+        - pyyaml >=6.0.0
+        - tomli >=2.0.0
         - ase !=3.24.*
         - gemmi >=0.6.1  # [not aarch64]
         - spglib >=2.1.0
         - matplotlib-base >=3.7.0
+        - mpmath >=1.3.0
       script: test_ncrystal.sh  # [unix]
       script: test_ncrystal.bat  # [win]
 
