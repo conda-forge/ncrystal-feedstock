@@ -125,6 +125,7 @@ outputs:
       requires:
         - python {{ python_min }}
         - pip
+        - git
         - cmake >=3.25
         - make  # [not win]
         - c-compiler
