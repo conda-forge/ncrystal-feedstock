@@ -121,7 +121,6 @@ outputs:
         - python >={{ python_min }}
         #Exact version pinning for consistent ncrystal environment:
         - ncrystal-core ={{ version }}
-        - ncrystal-lib ={{ version }}
         - ncrystal-python ={{ version }}
     test:
       requires:
@@ -136,36 +135,29 @@ outputs:
         - ruff
         - pyyaml
         - tomli
-        - git
-        #Gemmi is not ready on aarch64, so we pip install it manually in test_ncrystal.sh:
-        - gemmi  # [not aarch64]
-        - mpmath
-        - spglib
-        - ase <3.24.0
+        - ncrystal-all ={{version}}
       script: test_ncrystal.sh  # [unix]
       script: test_ncrystal.bat  # [win]
 
-#  Wait with an ncrystal-all package until later (gemmi is not present in linux
-#  aarch64 yet):
-#   - name: ncrystal-all
-#     build:
-#       noarch: generic
-#     requirements:
-#       run:
-#         #Exact version pinning for consistent ncrystal environment:
-#         - ncrystal ={{ version }}
-#         - ncrystal-core ={{ version }}
-#         - ncrystal-python ={{ version }}
-#         - ase !=3.24.*
-#         - gemmi >=0.6.1
-#         - spglib >=2.1.0
-#         - matplotlib-base >=3.7.0
-#     test:
-#       requires:
-#         - python {{ python_min }}
-#         - pip
-#       commands:
-#         - pip check
+   - name: ncrystal-all
+     build:
+       noarch: generic
+     requirements:
+       run:
+         #Exact version pinning for consistent ncrystal environment:
+         - ncrystal ={{ version }}
+         - ncrystal-core ={{ version }}
+         - ncrystal-python ={{ version }}
+         - ase !=3.24.*
+         - gemmi >=0.6.1  # [not aarch64]
+         - spglib >=2.1.0
+         - matplotlib-base >=3.7.0
+     test:
+       requires:
+         - python {{ python_min }}
+         - pip
+       commands:
+         - pip check
 
 about:
   home: https://github.com/mctools/ncrystal
