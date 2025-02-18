@@ -141,7 +141,7 @@ outputs:
 
   - name: ncrystal-all
     build:
-#      noarch: generic
+      noarch: generic
     requirements:
       run:
         #Exact version pinning for consistent ncrystal environment:
@@ -149,7 +149,7 @@ outputs:
         - ncrystal-core ={{ version }}
         - ncrystal-python ={{ version }}
         - ase !=3.24.*
-        - gemmi >=0.6.1  # [not aarch64]
+#        - gemmi >=0.6.1  # [not aarch64]
         - spglib >=2.1.0
         - matplotlib-base >=3.7.0
     test:
