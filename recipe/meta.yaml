@@ -135,7 +135,10 @@ outputs:
         - ruff
         - pyyaml
         - tomli
-        - ncrystal-all ={{ version }}
+        - ase !=3.24.*
+        - gemmi >=0.6.1  # [not aarch64]
+        - spglib >=2.1.0
+        - matplotlib-base >=3.7.0
       script: test_ncrystal.sh  # [unix]
       script: test_ncrystal.bat  # [win]
 
@@ -146,8 +149,6 @@ outputs:
 #      run:
 #        #Exact version pinning for consistent ncrystal environment:
 #        - ncrystal ={{ version }}
-#        - ncrystal-core ={{ version }}
-#        - ncrystal-python ={{ version }}
 #        - ase !=3.24.*
 ##        - gemmi >=0.6.1  # [not aarch64]
 #        - spglib >=2.1.0
