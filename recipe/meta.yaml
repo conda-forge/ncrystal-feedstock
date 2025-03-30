@@ -136,7 +136,7 @@ outputs:
         - pyyaml >=6.0.0
         - tomli >=2.0.0
         - ase !=3.24.*
-        - gemmi >=0.6.1  # [not aarch64]
+        - gemmi >=0.6.1
         - spglib >=2.1.0
         - matplotlib-base >=3.7.0
         - mpmath >=1.3.0
@@ -151,7 +151,7 @@ outputs:
 #        #Exact version pinning for consistent ncrystal environment:
 #        - ncrystal ={{ version }}
 #        - ase !=3.24.*
-##        - gemmi >=0.6.1  # [not aarch64]
+##        - gemmi >=0.6.1
 #        - spglib >=2.1.0
 #        - matplotlib-base >=3.7.0
 #    test:
