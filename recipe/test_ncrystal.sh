@@ -47,14 +47,6 @@ ${PYTHON} -m pip check
 ncrystal-pluginmanager --test DummyDataPlugin
 nctool -d plugins::DummyDataPlugin/dummy.ncmat
 
-#Workaround for potentially missing gemmi on linux-aarch64:
-export HAS_GEMMI=1
-${PYTHON} -c 'import gemmi' || export HAS_GEMMI=0
-
 ${PYTHON} -m pip install "git+https://github.com/mctools/ncrystal@v${PKG_VERSION}#subdirectory=ncrystal_verify" -vv --no-deps --no-build-isolation
 ${PYTHON} -m pip check
-if [ ${HAS_GEMMI} == 1 ]; then
-    ncrystal-verify
-else
-    ncrystal-verify -m gemmi
-fi
+ncrystal-verify

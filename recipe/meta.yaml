@@ -1,4 +1,4 @@
-{% set version = "4.1.4" %}
+{% set version = "4.1.6" %}
 
 package:
   name: ncrystal-suite
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/mctools/ncrystal/archive/v{{ version }}.tar.gz
-  sha256: cf0f6c09c561b0e7476452e90d437bba7044cc12320faf44556f079d5ee9e8e2
+  sha256: 4fc1be0503c6e68a110b6da13963bd2bf53154794a727c63f1218a56f6241eff
   folder: src
 
 build:
@@ -136,7 +136,7 @@ outputs:
         - pyyaml >=6.0.0
         - tomli >=2.0.0
         - ase !=3.24.*
-        - gemmi >=0.6.1  # [not aarch64]
+        - gemmi >=0.6.1
         - spglib >=2.1.0
         - matplotlib-base >=3.7.0
         - mpmath >=1.3.0
@@ -151,7 +151,7 @@ outputs:
 #        #Exact version pinning for consistent ncrystal environment:
 #        - ncrystal ={{ version }}
 #        - ase !=3.24.*
-##        - gemmi >=0.6.1  # [not aarch64]
+##        - gemmi >=0.6.1
 #        - spglib >=2.1.0
 #        - matplotlib-base >=3.7.0
 #    test:
