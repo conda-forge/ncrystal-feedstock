@@ -11,7 +11,7 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
 
 outputs:
   - name: ncrystal-lib
@@ -145,23 +145,40 @@ outputs:
       script: test_ncrystal.sh  # [unix]
       script: test_ncrystal.bat  # [win]
 
-#  - name: ncrystal-all
-#    build:
-#      noarch: generic
-#    requirements:
-#      run:
-#        #Exact version pinning for consistent ncrystal environment:
-#        - ncrystal ={{ version }}
-#        - ase !=3.24.*
-##        - gemmi >=0.6.1
-#        - spglib >=2.1.0
-#        - matplotlib-base >=3.7.0
-#    test:
-#      requires:
-#        - python {{ python_min }}
-#        - pip
-#      commands:
-#        - pip check
+  - name: ncrystal-extra
+    #Extra dependencies, typically needed by a large anount users.
+    build:
+      noarch: generic
+    requirements:
+      run:
+        #Exact version pinning for consistent ncrystal environment:
+        - ncrystal ={{ version }}
+        - gemmi >=0.6.1
+        - spglib >=2.1.0
+        - matplotlib-base >=3.7.0
+    test:
+      requires:
+        - python {{ python_min }}
+        - pip
+      commands:
+        - pip check
+
+  - name: ncrystal-all
+    #All extras, including those that might be big and used only by a few users.
+    build:
+      noarch: generic
+    requirements:
+      run:
+        #Exact version pinning for consistent ncrystal environment:
+        - ncrystal-extra ={{ version }}
+        - ase >=3.25.0
+        - endf-parserpy>=0.14.3
+    test:
+      requires:
+        - python {{ python_min }}
+        - pip
+      commands:
+        - pip check
 
 about:
   home: https://github.com/mctools/ncrystal
