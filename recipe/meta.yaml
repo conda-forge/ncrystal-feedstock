@@ -1,4 +1,4 @@
-{% set version = "4.2.12" %}
+{% set version = "4.3.0" %}
 
 package:
   name: ncrystal-suite
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://github.com/mctools/ncrystal/archive/v{{ version }}.tar.gz
-  sha256: 81fc8c2fed1746bc4d17beccc9f825d3a64ca1eb9a509e1ea0faf6d800115cfe
+  sha256: cd20c6e4544e773f3cd525442a0ec257bc7fef14642ac02c519b17be42920ade
   folder: src
 
 build:
   noarch: python
-  number: 1
+  number: 0
 
 outputs:
   - name: ncrystal-lib
@@ -76,16 +76,19 @@ outputs:
       noarch: python
       script: python -m pip install "./src/ncrystal_python" -vv --no-deps --no-build-isolation
       entry_points:
+        - ncrystal = NCrystal._clientry:main
         - nctool = NCrystal._cli_nctool:main
         - ncrystal_cif2ncmat = NCrystal._cli_cif2ncmat:main
         - ncrystal_endf2ncmat = NCrystal._cli_endf2ncmat:main
         - ncrystal_hfg2ncmat = NCrystal._cli_hfg2ncmat:main
         - ncrystal_mcstasunion = NCrystal._cli_mcstasunion:main
+        - ncrystal_minimc = NCrystal._cli_minimc:main
         - ncrystal_ncmat2cpp = NCrystal._cli_ncmat2cpp:main
+        - ncrystal_ncmat2endf = NCrystal._cli_ncmat2endf:main
         - ncrystal_ncmat2hkl = NCrystal._cli_ncmat2hkl:main
         - ncrystal_vdos2ncmat = NCrystal._cli_vdos2ncmat:main
         - ncrystal_verifyatompos = NCrystal._cli_verifyatompos:main
-        - ncrystal_ncmat2endf = NCrystal._cli_ncmat2endf:main
+        - ncrystal_query = NCrystal._cli_query:main
     requirements:
       build:
         - python  {{ python_min }}  # [build_platform != target_platform]
