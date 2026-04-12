@@ -1,4 +1,4 @@
-{% set version = "4.3.0" %}
+{% set version = "4.3.2" %}
 
 package:
   name: ncrystal-suite
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/mctools/ncrystal/archive/v{{ version }}.tar.gz
-  sha256: cd20c6e4544e773f3cd525442a0ec257bc7fef14642ac02c519b17be42920ade
+  sha256: 738948ca23c6656683f373827a68e9d88ba10cca66c564331fb19b8493c8f756
   folder: src
 
 build:
